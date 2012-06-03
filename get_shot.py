@@ -18,12 +18,10 @@ parser.add_option("-u", "--url", dest="url", help="url to get a snapshot of")
 
 if options.url != None:
         url = str(options.url)
-else:   
-        url = "http://www.hp.com"
-print "getting snapshot of " + url
+	print "getting snapshot of " + url
+	filename = "bookmarks-" + (hashlib.md5(url).hexdigest()) + ".png" 
+	outfile = os.path.join(MEDIA_ROOT, filename)
+	params = [PHANTOM, SCRIPT, url, outfile]
 
-filename = "bookmarks-" + (hashlib.md5(url).hexdigest()) + ".png" 
-outfile = os.path.join(MEDIA_ROOT, filename)
-params = [PHANTOM, SCRIPT, url, outfile]
+	exitcode = subprocess.call(params)
 
-exitcode = subprocess.call(params)

@@ -4,6 +4,7 @@ import simplejson as json
 import smtplib
 import datetime 
 from optparse import OptionParser 
+import subprocess
 
 def test(abc):
 	SMTP_SERVER = 'smtp.gmail.com'
@@ -86,6 +87,7 @@ for title in json_obj["results"]:
 	if title["item"]["url"] != "":
 		string = string + "\""
 		string += repr(title["item"]["url"] )
+		url_string = str(title["item"]["url"])
 		string = string + "\""
 	else:
 		string += repr("")
@@ -100,6 +102,9 @@ for title in json_obj["results"]:
 	string = string + "\""
  
 	output_file.write(string+"\n")
+	if url_string != "":
+		params = ["./get_shot.py", "--url="+url_string]
+		exitcode = subprocess.call("./get_shot.py --url="+url_string, shell=True)
 
 output_file.close()
 
