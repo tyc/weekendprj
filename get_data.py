@@ -103,8 +103,9 @@ for title in json_obj["results"]:
  
 	output_file.write(string+"\n")
 	if url_string != "":
+		itemid_string=repr(title["item"]["id"])
 		params = ["./get_shot.py", "--url="+url_string]
-		exitcode = subprocess.call("./get_shot.py --url="+url_string, shell=True)
+		exitcode = subprocess.call("./get_shot.py --id="+itemid_string+" --url="+url_string, shell=True)
 
 output_file.close()
 
